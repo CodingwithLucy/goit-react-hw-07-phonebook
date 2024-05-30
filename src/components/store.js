@@ -4,7 +4,6 @@ import contactsReducer from './contacts.js';
 const store = configureStore({
   reducer: {
     contacts: contactsReducer,
-    filter: '',
   },
 });
 
