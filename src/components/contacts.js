@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+/*import { createSlice } from '@reduxjs/toolkit';
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -31,3 +31,4 @@ const contactsSlice = createSlice({
 
 export const { addContact, deleteContact, setFilter } = contactsSlice.actions;
 export default contactsSlice.reducer;
+*/

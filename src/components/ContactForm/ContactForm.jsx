@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../contacts.js';
+import { addContact } from '../contactsSlice.js';
 
 const ContactForm = () => {
   const [name, setName] = useState('');

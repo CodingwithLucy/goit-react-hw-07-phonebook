@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from 'components/contacts';
+import { deleteContact } from 'components/contactsSlice.js';
 import { nanoid } from 'nanoid';
 
 const ContactList = () => {
