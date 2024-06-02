@@ -5,7 +5,11 @@ export const fetchContacts = createAsyncThunk(
   async () => {
     try {
       const response = await fetch(
-        'https://665c5c273e4ac90a04d95605.mockapi.io/phonebook/contacts'
+        'https://665c5c273e4ac90a04d95605.mockapi.io/phonebook/contacts',
+        {
+          method: 'GET',
+          headers: { 'content-type': 'application/json' },
+        }
       );
       if (!response.ok) {
         throw new Error('Network response was not ok');
