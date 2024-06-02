@@ -1,15 +1,11 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
   async () => {
     try {
       const response = await fetch(
-        'https://665c5c273e4ac90a04d95605.mockapi.io/phonebook/contacts',
-        {
-          method: 'GET',
-          headers: { 'content-type': 'application/json' },
-        }
+        'https://665c5c273e4ac90a04d95605.mockapi.io/phonebook/contacts'
       );
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -22,14 +18,12 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
-const initialState = {
-  contacts: [],
-  filter: '',
-};
-
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState,
+  initialState: {
+    contacts: [],
+    // other initial state properties...
+  },
   reducers: {
     addContact: (state, action) => {
       state.contacts.push(action.payload);

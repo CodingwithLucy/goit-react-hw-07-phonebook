@@ -1,26 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from 'components/contactsSlice.js';
+import { fetchContacts, deleteContact } from '../contactsSlice.js';
 import { nanoid } from 'nanoid';
 
-const ContactList = ({ contacts }) => {
-  const filter = useSelector(state => state.contacts.filter);
+const ContactList = () => {
+  const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter?.toLowerCase() || '')
-  );
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const filteredContacts = Array.isArray(contacts) ? contacts : [];
 
   const handleDelete = contactId => {
     dispatch(deleteContact(contactId));
   };
 
   return (
-    <ul>
-      {filteredContacts.map(({ id, name, number }) => (
-        <li key={nanoid}>
-          {name}: {number}
-          <button onClick={() => handleDelete(id)}>DELETE</button>
+    <ul className="contact-list">
+      {filteredContacts.map(contact => (
+        <li key={nanoid()} className="contact-list-item">
+          {contact.name}: {contact.number}
+          <button onClick={() => handleDelete(contact.id)}>DELETE</button>
         </li>
       ))}
     </ul>
