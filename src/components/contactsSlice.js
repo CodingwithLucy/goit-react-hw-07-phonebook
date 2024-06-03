@@ -18,11 +18,13 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
+const initialState = {
+  filter: '',
+};
+
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: {
-    contacts: [],
-  },
+  initialState,
   reducers: {
     addContact: (state, action) => {
       state.contacts.push(action.payload);

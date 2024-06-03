@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchContacts, deleteContact } from '../contactsSlice.js';
 import { nanoid } from 'nanoid';
@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 const ContactList = () => {
   const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState('');
+  const filter = useSelector(state => state.contacts.filter);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -14,7 +14,7 @@ const ContactList = () => {
 
   const filteredContacts = Array.isArray(contacts)
     ? contacts.filter(contact =>
-        contact.name.toLowerCase().includes(searchTerm.toLowerCase())
+        contact.name.toLowerCase().includes(filter.toLowerCase())
       )
     : [];
 
@@ -22,21 +22,8 @@ const ContactList = () => {
     dispatch(deleteContact(contactId));
   };
 
-  const handleInputChange = e => {
-    setSearchTerm(e.target.value);
-  };
-
   return (
     <div>
-      <label>
-        FIND CONTACT BY NAME
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={handleInputChange}
-          placeholder="Search by name"
-        />
-      </label>
       <ul className="contact-list">
         {filteredContacts.map(contact => (
           <li key={nanoid()} className="contact-list-item">
