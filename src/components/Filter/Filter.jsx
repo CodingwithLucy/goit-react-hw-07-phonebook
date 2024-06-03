@@ -9,13 +9,6 @@ const Filter = () => {
   const handleFilterChange = e => {
     dispatch(setFilter(e.target.value));
   };
-
-  return (
-    <label>
-      FIND CONTACT BY NAME
-      <input type="text" value={filter} onChange={handleFilterChange} />
-    </label>
-  );
 };
 
 export default Filter;
